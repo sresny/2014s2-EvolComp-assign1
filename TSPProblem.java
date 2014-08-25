@@ -62,12 +62,12 @@ class TSPProblem{
 
 		Population p = new Population(cities,n);
 
-		p.setCrossover(new OrderCrossover(),1);
+		p.setCrossover(new OrderCrossover(),0.75);
 		p.setMutator(new InvertMutator(),0.2);
 
 		for(int i=0; i<iterations;i++){
 			p.crossover();
-			p.mutate();
+			p.mutateChildren();
 			p.select_tournament(150,100);
 			if(i%500==0){
 				System.out.println("Average cost: "+p.average());

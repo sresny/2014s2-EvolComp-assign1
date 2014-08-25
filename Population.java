@@ -9,11 +9,12 @@ class Population{
 	private Crossover crosser;
 	private double mutProb;
 	private double crossProb;
+	private int size;
 
 	public Population(ArrayList<City> cities,int n){
 		this.cities = new ArrayList<City>(cities);
 		this.individuals = new ArrayList<Individual>(n);
-
+		size = n;
 		for(int i=0;i<n;i++){
 			Individual ind = new Individual(cities);
 			ind.shuffle();
@@ -58,15 +59,27 @@ class Population{
 		}
 	}
 
+	public void mutateChildren(){
+		for(int i=size; i<individuals.size(); i++){
+			Random rand = new Random();
+			if(rand.nextDouble()<mutProb){
+				mutator.mutate(individuals.get(i));
+			} 
+		}
+
+	}
+
 	public void crossover(){
 		Collections.shuffle(individuals);
 		Random rand = new Random();
-		int size = individuals.size()-1;
-		for(int i=0;i<size;i+=2){
+		for(int i=0;i<size-1;i+=2){
 			if(rand.nextDouble()<crossProb){
 				Children child = crosser.crossover(individuals.get(i),individuals.get(i+1));
 				individuals.add(child.a);
 				individuals.add(child.b);
+			}else{
+				individuals.add(new Individual(individuals.get(i)));
+				individuals.add(new Individual(individuals.get(i+1)));
 			}
 		}
 	}
