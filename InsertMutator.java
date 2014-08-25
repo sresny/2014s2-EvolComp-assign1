@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import static java.lang.Math.*;
 
 public class InsertMutator implements Mutator{
 	public void mutate(Individual ind){

@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Collections;
+import static java.lang.Math.*;
+
 class Mutators{
 
 	public static void mutate_insert(Individual ind){
