@@ -111,7 +111,7 @@ class TSPProblem{
 				System.out.println("Lowest cost: "+p.best());
 				System.out.println();
 				if(p.average()-p.best()<0.000001){
-					System.out.print("Converged ");
+					System.out.println("Converged ");
 					break;
 				}
 			}
