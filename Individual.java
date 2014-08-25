@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import static java.lang.Math.*;
 
 class Individual implements Comparable<Individual>{
 	ArrayList<City> cityList;
@@ -24,13 +25,19 @@ class Individual implements Comparable<Individual>{
 		return cityList.size();
 	}
 
-	public int getFitness(){
-		return 0;
+	public double getFitness(){
+		double dist = 0;
+		for(int i=0; i<size(); i++){
+			double dx = cityList.get(i).getX() - cityList.get((i+1)%size()).getX();
+			double dy = cityList.get(i).getY() - cityList.get((i+1)%size()).getY();
+			dist += sqrt(dx*dx + dy*dy);
+		}
+		return dist;
 	}
 
 	@Override
 	public int compareTo(Individual other){
-		return Integer.compare(this.getFitness(),other.getFitness());
+		return Double.compare(this.getFitness(),other.getFitness());
 	}
 
 }

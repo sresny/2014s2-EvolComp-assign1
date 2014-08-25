@@ -27,10 +27,10 @@ class Population{
 			if(competing<individuals.size()){
 				competitors = new ArrayList<Individual>(individuals.subList(0,competing));
 				Collections.shuffle(individuals);
-				Collections.sort(competitors);
 			}else{
 				competitors = individuals;
 			}
+			Collections.sort(competitors);
 			individuals = new ArrayList<Individual>(competitors.subList(0,winners));
 		}
 	}
@@ -60,14 +60,28 @@ class Population{
 
 	public void crossover(){
 		Collections.shuffle(individuals);
-		for(int i=0;i<individuals.size()-1;i+=2){
-			Random rand = new Random();
+		Random rand = new Random();
+		int size = individuals.size()-1;
+		for(int i=0;i<size;i+=2){
 			if(rand.nextDouble()<crossProb){
 				Children child = crosser.crossover(individuals.get(i),individuals.get(i+1));
 				individuals.add(child.a);
 				individuals.add(child.b);
 			}
 		}
+	}
+
+	public double average(){
+		double sum = 0;
+		for(Individual ind : individuals){
+			sum += ind.getFitness();
+		}
+		return sum/individuals.size();
+	}
+
+	public double best(){
+		Collections.sort(individuals);
+		return individuals.get(0).getFitness();
 	}
 
 }
