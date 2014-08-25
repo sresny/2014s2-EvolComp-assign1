@@ -22,10 +22,17 @@ class Population{
 	}
 
 	public void select_tournament(int competing, int winners){
-		Collections.shuffle(individuals);
-		ArrayList<Individual> competitors = new ArrayList<Individual>(individuals.subList(0,competing));
-		Collections.sort(competitors);
-		individuals = new ArrayList<Individual>(competitors.subList(0,winners));
+		if(winners<individuals.size()){
+			ArrayList<Individual> competitors;
+			if(competing<individuals.size()){
+				competitors = new ArrayList<Individual>(individuals.subList(0,competing));
+				Collections.shuffle(individuals);
+				Collections.sort(competitors);
+			}else{
+				competitors = individuals;
+			}
+			individuals = new ArrayList<Individual>(competitors.subList(0,winners));
+		}
 	}
 
 	public ArrayList<Individual> getIndividuals(){
