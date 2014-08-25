@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class TSPProblem{
 	public static void main(String[] args){
-		int n = 100;
+		int n = 1000;
 		int iterations = 10000;
 
 		ArrayList<City> cities = new ArrayList<City>(51);
@@ -63,17 +63,27 @@ class TSPProblem{
 		Population p = new Population(cities,n);
 
 		p.setCrossover(new OrderCrossover(),0.75);
-		p.setMutator(new InvertMutator(),0.2);
+		p.setMutator(new InvertMutator(),0.9);
 
-		for(int i=0; i<iterations;i++){
+		long startTime =System.nanoTime();
+		for(int i=0; i<=iterations;i++){
 			p.crossover();
 			p.mutateChildren();
-			p.select_tournament(150,100);
+			p.select_tournament(1500,1000);
 			if(i%500==0){
+				System.out.println("After "+i+" iterations");
 				System.out.println("Average cost: "+p.average());
 				System.out.println("Lowest cost: "+p.best());
+				System.out.println();
+				if(p.average()-p.best()<0.000001){
+					System.out.print("Converged ");
+					break;
+				}
 			}
 		}
+		
+		int time =(int)((System.nanoTime() - startTime)/1000000000);
 
+		System.out.println("Time elapsed: "+time+"s");
 	}
 }
