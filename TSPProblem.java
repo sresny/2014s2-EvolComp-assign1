@@ -99,7 +99,7 @@ class TSPProblem{
 
 		Crossover c = new OrderCrossover();;
 		Mutator m = new InvertMutator();
-		Selector s = new TournamentSelector(4,2);
+		Selector s = new RouletteSelector(myPopulationSize);
 
 		long startTime =System.nanoTime();
 		for(int i=0; i<=myIterations;i++){
