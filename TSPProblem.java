@@ -98,7 +98,7 @@ class TSPProblem{
 		Population p = new Population(cities,myPopulationSize);
 
 		p.setCrossover(new OrderCrossover(),0.75);
-		p.setMutator(new InvertMutator(),0.9);
+		p.setMutator(new ScrambleMutator(),0.9);
 
 		long startTime =System.nanoTime();
 		for(int i=0; i<=myIterations;i++){
