@@ -97,14 +97,15 @@ class TSPProblem{
 
 		Population p = new Population(cities,myPopulationSize);
 
-		p.setCrossover(new OrderCrossover(),0.75);
-		p.setMutator(new ScrambleMutator(),0.9);
+		Crossover c = new OrderCrossover();;
+		Mutator m = new InvertMutator();
+		Selector s = new TournamentSelector(4,2);
 
 		long startTime =System.nanoTime();
 		for(int i=0; i<=myIterations;i++){
-			p.crossover();
-			p.mutateChildren();
-			p.select_tournament(2*myPopulationSize,myPopulationSize);
+			p.crossover(c,0.75);
+			p.mutateChildren(m,0.9);
+			p.select(s);
 			if(i%500==0){
 				System.out.println("After "+i+" iterations");
 				System.out.println("Average cost: "+p.average());
