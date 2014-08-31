@@ -16,6 +16,9 @@ class Population{
 			ind.shuffle();
 			individuals.add(ind);
 		}
+		for(Individual ind : individuals){
+			ind.updateFitness();
+		}
 	}
 
 	public ArrayList<Individual> getIndividuals(){
@@ -31,6 +34,7 @@ class Population{
 			Random rand = new Random();
 			if(rand.nextDouble()<p){
 				m.mutate(ind);
+				ind.updateFitness();
 			} 
 		}
 	}
@@ -40,6 +44,7 @@ class Population{
 			Random rand = new Random();
 			if(rand.nextDouble()<p){
 				m.mutate(individuals.get(i));
+				individuals.get(i).updateFitness();
 			} 
 		}
 
@@ -51,11 +56,17 @@ class Population{
 		for(int i=0;i<size-1;i+=2){
 			if(rand.nextDouble()<p){
 				Children child = c.crossover(individuals.get(i),individuals.get(i+1));
+				child.a.updateFitness();
+				child.b.updateFitness();
 				individuals.add(child.a);
 				individuals.add(child.b);
 			}else{
-				individuals.add(new Individual(individuals.get(i)));
-				individuals.add(new Individual(individuals.get(i+1)));
+				Individual cloneA = new Individual(individuals.get(i));
+				Individual cloneB = new Individual(individuals.get(i+1));
+				cloneA.updateFitness();
+				cloneB.updateFitness();
+				individuals.add(cloneA);
+				individuals.add(cloneB);
 			}
 		}
 	}
@@ -68,9 +79,9 @@ class Population{
 		return sum/individuals.size();
 	}
 
-	public double best(){
+	public Individual best(){
 		Collections.sort(individuals);
-		return individuals.get(0).getFitness();
+		return individuals.get(0);
 	}
 
 }
