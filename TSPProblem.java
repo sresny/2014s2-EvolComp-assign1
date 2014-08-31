@@ -63,9 +63,9 @@ class TSPProblem{
 			if(i%500==0){
 				System.out.println("After "+i+" iterations");
 				System.out.println("Average cost: "+p.average());
-				System.out.println("Lowest cost: "+p.best());
+				System.out.println("Lowest cost: "+p.best().getFitness());
 				System.out.println();
-				if(p.average()-p.best()<0.000001){
+				if(p.average()-p.best().getFitness()<0.000001){
 					System.out.println("Converged ");
 					break;
 				}

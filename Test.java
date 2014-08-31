@@ -65,8 +65,6 @@ class Test{
 		
 		cities = Parser.loadCities(myFilename);
 
-		Population p = new Population(cities,myPopulationSize);
-
 		Crossover[] crossovers = {new PMXCrossover(), new CycleCrossover(), new OrderCrossover()};
 		Mutator[] mutators = {new InvertMutator(), new ScrambleMutator(0.5), new InsertMutator(), new SwapMutator()};
 		Selector[] selectors = {new RouletteSelector(myPopulationSize), new TournamentSelector(4,2), new SUSSelector(myPopulationSize)};
@@ -81,6 +79,8 @@ class Test{
 		for(Crossover c : crossovers){
 			for(Mutator m : mutators){
 				for(Selector s : selectors){
+					Population p = new Population(cities,myPopulationSize);
+
 					combId ++;
 					System.out.println("Setup "+combId+" of "+combs);
 					System.out.println("Using crossover "+c.getClass().getName());
