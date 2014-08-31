@@ -6,7 +6,7 @@ import static java.lang.Math.*;
 public class SUSSelector implements Selector{
 	private int n;
 
-	public SUSSelector(int n){
+	public void setPopulation(int n){
 		this.n = n;
 	}
 

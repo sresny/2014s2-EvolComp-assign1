@@ -5,6 +5,10 @@ import static java.lang.Math.*;
 public class TournamentSelector implements Selector{
 	private int size;
 	private int winners;
+
+	public void setPopulation(int n){
+		continue;
+	}
 	
 	public TournamentSelector(int size, int winners){
 		this.size = size;

@@ -6,10 +6,10 @@ import static java.lang.Math.*;
 public class RouletteSelector implements Selector{
 	private int n;
 
-	public RouletteSelector(int n){
+	public void setPopulation(int n){
 		this.n = n;
 	}
-
+	
 	public ArrayList<Individual> select(ArrayList<Individual> individuals){
 		Collections.shuffle(individuals);
 
