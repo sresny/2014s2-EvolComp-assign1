@@ -67,7 +67,7 @@ class Test{
 
 		Crossover[] crossovers = {new PMXCrossover(), new CycleCrossover(), new OrderCrossover()};
 		Mutator[] mutators = {new InvertMutator(), new ScrambleMutator(0.5), new InsertMutator(), new SwapMutator()};
-		Selector[] selectors = {new RouletteSelector(myPopulationSize), new TournamentSelector(4,2), new SUSSelector(myPopulationSize)};
+		Selector[] selectors = {new RouletteSelector(), new TournamentSelector(4,2), new SUSSelector()};
 
 		String csvOut = "";
 		int combId = 0;
@@ -79,6 +79,7 @@ class Test{
 		for(Crossover c : crossovers){
 			for(Mutator m : mutators){
 				for(Selector s : selectors){
+					s.setPopulation(myPopulationSize);
 					Population p = new Population(cities,myPopulationSize);
 
 					combId ++;

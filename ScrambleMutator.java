@@ -4,6 +4,10 @@ import java.util.Random;
 public class ScrambleMutator implements Mutator{
 
 	private double p;
+	
+	public ScrambleMutator(){
+		this.p = 0.5;
+	}
 
 	public ScrambleMutator(double p){
 		this.p = p;

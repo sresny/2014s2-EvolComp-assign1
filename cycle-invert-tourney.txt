@@ -1,0 +1,14 @@
+After 0 iterations
+Average cost: 1595.7585354903113
+Lowest cost: 1425.5546270281284
+
+After 500 iterations
+Average cost: 484.05557330757654
+Lowest cost: 467.20997562624774
+
+After 1000 iterations
+Average cost: 457.7682778674375
+Lowest cost: 447.2987857228084
+
+Terminated early due to unchanging best solution
+Time elapsed: 2.556s

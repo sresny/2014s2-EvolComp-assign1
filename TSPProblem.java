@@ -36,7 +36,8 @@ class TSPProblem{
 			System.exit(0);
 		}
 		for (int i = 0; i<args.length; i++)
-		{
+		{	
+			//Parse command line arguments
 			if (args[i].toLowerCase().equals("-f"))
 			{
 				myFilename = args[i+1];
@@ -51,6 +52,7 @@ class TSPProblem{
 				myPopulationSize = Integer.parseInt(args[i+1]);
 			}else if (args[i].toLowerCase().equals("-c"))
 			{
+				//Produce appropriate crossover object
 				String name = args[i+1];
 				switch(name){
 					case "pmx":
@@ -65,6 +67,7 @@ class TSPProblem{
 				}
 			}else if (args[i].toLowerCase().equals("-m"))
 			{
+				//Produce appropriate mutator object
 				String name = args[i+1];
 				switch(name){
 					case "insert":
@@ -82,6 +85,7 @@ class TSPProblem{
 				}
 			}else if (args[i].toLowerCase().equals("-s"))
 			{
+				//Produce appropriate selector object
 				String name = args[i+1];
 				switch(name){
 					case "roulette":
@@ -104,19 +108,30 @@ class TSPProblem{
 		Tools.debugPrintln("#iterations is "+myIterations);
 		Tools.debugPrintln("Population size is "+myPopulationSize);
 		
+		//Load city data from file
 		cities = Parser.loadCities(myFilename);
 
+		//Pass values to selector object
 		s.setPopulation(myPopulationSize);
+
+		//Produce population
 		Population p = new Population(cities,myPopulationSize);
 
-
+		//Start timing
 		long startTime =System.nanoTime();
+
+		//Initialise variables for tracking convergence
 		int sameBest = 0;
 		double bestFitness = p.best().getFitness();
+
+
 		for(int i=0; i<=myIterations;i++){
+			//Apply operatiosn with given probabilities
 			p.crossover(c,0.75);
 			p.mutateChildren(m,0.9);
 			p.select(s);
+
+			//Test for convergence (repeated same value of best fitness)
 			double newBest = p.best().getFitness();
 			if(newBest<bestFitness){
 				bestFitness = newBest;
@@ -128,6 +143,8 @@ class TSPProblem{
 				System.out.println("Terminated early due to unchanging best solution");
 				break;
 			}
+
+			//Output status every 500 iterations
 			if(i%500==0){
 				System.out.println("After "+i+" iterations");
 				System.out.println("Average cost: "+p.average());
@@ -135,7 +152,7 @@ class TSPProblem{
 				System.out.println();
 			}
 		}
-		
+		//Calculate run time in milliseconds
 		int time =(int)((System.nanoTime() - startTime)/1000000);
 
 		System.out.println("Time elapsed: "+time/1000.0+"s");

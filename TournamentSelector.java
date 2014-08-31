@@ -7,7 +7,6 @@ public class TournamentSelector implements Selector{
 	private int winners;
 
 	public void setPopulation(int n){
-		continue;
 	}
 	
 	public TournamentSelector(int size, int winners){
